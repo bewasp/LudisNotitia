@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Tab, Tabs } from 'native-base';
+import { StyleSheet} from "react-native";
+import { Container, Header, Left, Body, Right, Title, Tab, Tabs } from 'native-base';
 import Tab1 from './tabs/tab1';
 import Tab2 from './tabs/tab2';
 import Tab3 from './tabs/tab3';
@@ -8,15 +9,30 @@ export default class TabsExample extends Component {
     render() {
         return (
             <Container>
-                <Header hasTabs />
-                <Tabs>
-                    <Tab heading="Football">
+                <Header style={{backgroundColor:'#000000'}} hasTabs>
+                    <Left/>
+                      <Body>
+                         <Title>Ludis Notitia</Title>
+                      </Body>
+                    <Right />
+                </Header>
+                <Tabs tabBarUnderlineStyle={{backgroundColor:'white'}}>
+                    <Tab tabStyle={{backgroundColor:'#808080'}}
+                         activeTabStyle={{backgroundColor:'#000000'}}
+                         textStyle={{color:'white'}}
+                         heading="Football">
                         <Tab1 />
                     </Tab>
-                    <Tab heading="NBA">
+                    <Tab tabStyle={{backgroundColor:'#808080'}}
+                         activeTabStyle={{backgroundColor:'#000000'}}
+                         textStyle={{color:'white'}}
+                         heading="NBA">
                         <Tab2 />
                     </Tab>
-                    <Tab heading="NHL">
+                    <Tab tabStyle={{backgroundColor:'#808080'}}
+                         activeTabStyle={{backgroundColor:'#000000'}}
+                         textStyle={{color:'white'}}
+                         heading="NHL">
                         <Tab3 />
                     </Tab>
                 </Tabs>
@@ -24,3 +40,4 @@ export default class TabsExample extends Component {
         );
     }
 }
+
