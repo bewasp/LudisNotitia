@@ -1,26 +1,55 @@
 import React, { Component } from 'react';
-import { Container, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
+import { Alert, View, ActivityIndicator } from 'react-native';
+import { Container, Content, List, Text } from 'native-base';
+import {getArticles} from '../../service/news';
+
+import  DataItem  from '../../component/dataItem';
+
 export default class Tab1 extends Component {
+
+    constructor(props) {
+        super();
+
+        this.state = {
+            isLoading: true,
+            data: null
+        }
+    }
+
+    componentDidMount() {
+        getArticles().then(data => {
+            this.setState({
+                isLoading: false,
+                data: data
+            });
+        }, error => {
+                Alert.alert('Error', 'Something went wrong!');
+            }
+        )
+    }
+
     render() {
+        console.log(this.state.data);
+
+        let view = this.state.isLoading ? (
+            <View>
+                <ActivityIndicator animating={this.state.isLoading} />
+                <Text style={{marginTop: 10}}>Please wait...</Text>
+            </View>
+        ) : (
+            <List
+                dataArray = {this.state.data}
+                renderRow = {(item) => {
+                    return (
+                        <DataItem data = {item} />
+                    )
+                }} />
+        )
+
         return (
             <Container>
                 <Content>
-                    <List>
-                        <ListItem thumbnail>
-                            <Left>
-                                <Thumbnail square source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Football_%28soccer_ball%29.svg/1200px-Football_%28soccer_ball%29.svg.png' }} />
-                            </Left>
-                            <Body>
-                                <Text>Football news</Text>
-                                <Text note numberOfLines={1}>It's hard time for... </Text>
-                            </Body>
-                            <Right>
-                                <Button transparent>
-                                    <Text>View more</Text>
-                                </Button>
-                            </Right>
-                        </ListItem>
-                    </List>
+                    {view}
                 </Content>
             </Container>
         );

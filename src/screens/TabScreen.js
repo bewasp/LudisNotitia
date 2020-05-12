@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet} from "react-native";
 import { Container, Header, Left, Body, Right, Title, Tab, Tabs } from 'native-base';
 import Tab1 from './tabs/tab1';
 import Tab2 from './tabs/tab2';
