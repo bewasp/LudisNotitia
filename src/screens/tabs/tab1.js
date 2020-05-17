@@ -1,28 +1,46 @@
 import React, { Component } from 'react';
 import { Alert, View, ActivityIndicator } from 'react-native';
 import { Container, Content, List, Text } from 'native-base';
-import {getArticles} from '../../service/news';
 
-import  DataItem  from '../../component/dataItem';
+import DataItem from '../../component/dataItem';
+import Modal from '../../component/modal';
 
-export default class Tab1 extends Component {
+import { getArticles } from '../../service/news';
+
+export default class ListThumbnailExample extends Component {
 
     constructor(props) {
-        super();
+        super(props);
 
         this.state = {
             isLoading: true,
-            data: null
+            data: null,
+            setModalVisible: false,
+            modalArticleData: {}
         }
+    }
+
+    handleItemDataOnPress = (articleData) => {
+        this.setState({
+            setModalVisible: true,
+            modalArticleData: articleData
+        });
+    }
+
+    handleModalClose = () => {
+        this.setState({
+            setModalVisible: false,
+            modalArticleData: {}
+        });
     }
 
     componentDidMount() {
         getArticles().then(data => {
-            this.setState({
-                isLoading: false,
-                data: data
-            });
-        }, error => {
+                this.setState({
+                    isLoading: false,
+                    data: data
+                });
+            }, error => {
                 Alert.alert('Error', 'Something went wrong!');
             }
         )
@@ -32,16 +50,16 @@ export default class Tab1 extends Component {
         console.log(this.state.data);
 
         let view = this.state.isLoading ? (
-            <View>
-                <ActivityIndicator animating={this.state.isLoading} />
-                <Text style={{marginTop: 10}}>Please wait...</Text>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <ActivityIndicator animating={this.state.isLoading} color="#00f0ff" />
+                <Text style={{marginTop: 10}} children="Please Wait.." />
             </View>
         ) : (
             <List
-                dataArray = {this.state.data}
-                renderRow = {(item) => {
+                dataArray={this.state.data}
+                renderRow={(item) => {
                     return (
-                        <DataItem data = {item} />
+                        <DataItem onPress={this.handleItemDataOnPress} data={item} />
                     )
                 }} />
         )
@@ -51,6 +69,11 @@ export default class Tab1 extends Component {
                 <Content>
                     {view}
                 </Content>
+                <Modal
+                    showModal={this.state.setModalVisible}
+                    articleData={this.state.modalArticleData}
+                    onClose={this.handleModalClose}
+                />
             </Container>
         );
     }
