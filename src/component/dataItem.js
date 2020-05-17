@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { ListItem, Left, Right, Thumbnail, Body, View, Text, Button } from 'native-base';
 import TimeAgo from './time';
 
-class DataItem extends Component {
+export default class DataItem extends Component {
 
     constructor(props) {
         super(props);
@@ -37,5 +37,3 @@ class DataItem extends Component {
         );
     }
 }
-
-export default DataItem;

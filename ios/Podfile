@@ -79,6 +79,8 @@ target 'Ludis_Notitia' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'react-native-wkwebview', :path => '../node_modules/react-native-wkwebview-reborn'
+
   target 'Ludis_NotitiaTests' do
     inherit! :complete
     # Pods for testing

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Dimensions, Modal, Share } from 'react-native';
+import { Modal, Share } from 'react-native';
 import { WebView } from 'react-native-webview'
 import {Container, Header, Content, Body, Left, Icon, Right, Title, Button} from 'native-base';
 
-const webViewHeight = Dimensions.get('window').height - 56;
 
 export default class ModalComponent extends Component {
 
@@ -51,7 +50,7 @@ export default class ModalComponent extends Component {
                                 </Button>
                             </Right>
                         </Header>
-                        <Content contentContainerStyle={{height: webViewHeight}}>
+                        <Content contentContainerStyle={{flexGrow: 1}}>
                             <WebView style={{flex: 1}}
                                      source={{uri:url}}
                                      onError={this.handleClose}
