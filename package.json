@@ -14,6 +14,7 @@
     "native-base": "^2.13.12",
     "react": "16.11.0",
     "react-native": "0.62.0",
+    "react-native-splash-screen": "^3.2.0",
     "react-native-webview": "^8.2.1"
   },
   "devDependencies": {

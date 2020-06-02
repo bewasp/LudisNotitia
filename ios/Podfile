@@ -81,6 +81,8 @@ target 'Ludis_Notitia' do
 
   pod 'react-native-wkwebview', :path => '../node_modules/react-native-wkwebview-reborn'
 
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
   target 'Ludis_NotitiaTests' do
     inherit! :complete
     # Pods for testing
